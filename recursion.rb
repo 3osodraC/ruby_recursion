@@ -25,13 +25,19 @@ end
 
 # Recursion methods in ruby.
 class Recursion
-  def fibs_rec
-    # fibs_rec
+  def fibs_rec(int)
+    return [0, 1] if int <= 2
+
+    fibs = fibs_rec(int - 1)
+    fibs.push(fibs[-1] + fibs[-2])
   end
 end
 
 normal = Normal.new
+recursion = Recursion.new
 # recursion = Recursion.new
 
 puts 'Fibonacci Sequence (non-recursive, 16 terms):'
 normal.fibs(16)
+puts 'Fibonacci Sequence (recursive, 16 terms):'
+p recursion.fibs_rec(16)
