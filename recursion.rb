@@ -31,11 +31,24 @@ class Recursion
     fibs = fibs_rec(int - 1)
     fibs.push(fibs[-1] + fibs[-2])
   end
+
+  def merge_sort(arr)
+    # sorted_arr = []
+    if arr.size < 2 # || arr.size == sorted_arr.size
+      arr
+    else
+      half = (arr.size / 2).ceil
+      arr1 = []
+      arr2 = []
+
+      arr.each_slice(half) { |slice| arr1.empty? ? arr1 = slice : arr2 = slice }
+      # sorted_arr = merge_sort
+    end
+  end
 end
 
 normal = Normal.new
 recursion = Recursion.new
-# recursion = Recursion.new
 
 puts 'Fibonacci Sequence (non-recursive, 16 terms):'
 normal.fibs(16)
