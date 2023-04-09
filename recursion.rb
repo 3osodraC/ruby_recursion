@@ -53,7 +53,7 @@ class Recursion
       arr_l_rec = merge_sort(arr_l)
       arr_r_rec = merge_sort(arr_r)
 
-      # Sorts the 2 smallest splices of the array at the bottom of the recursion.
+      # Sorts the 2 smallest slices of the array at the bottom of the recursion.
       if arr_l_rec.size == 1 && arr_r_rec.size == 1
         if arr_l_rec[0] < arr_r_rec[0]
           sorted.push(arr_l_rec, arr_r_rec)
