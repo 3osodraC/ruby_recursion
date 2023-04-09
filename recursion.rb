@@ -42,15 +42,18 @@ class Recursion
     if arr.size < 2
       arr
     else
+      # Splits the array in two.
       arr_l = []
       arr_r = []
       half = (arr.size / 2).ceil
       arr.each_slice(half) { |slice| arr_l.empty? ? arr_l = slice : arr_r = slice }
 
+      # Recursion commenced.
       sorted = []
       arr_l_rec = merge_sort(arr_l)
       arr_r_rec = merge_sort(arr_r)
 
+      # Sorts the 2 smallest splices of the array at the bottom of the recursion.
       if arr_l_rec.size == 1 && arr_r_rec.size == 1
         if arr_l_rec[0] < arr_r_rec[0]
           sorted.push(arr_l_rec, arr_r_rec)
