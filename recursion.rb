@@ -49,20 +49,35 @@ class Recursion
       arr.each_slice(half) { |slice| arr_l.empty? ? arr_l = slice : arr_r = slice }
 
       # Recursion commenced.
-      sorted = []
       arr_l_rec = merge_sort(arr_l)
-      arr_r_rec = merge_sort(arr_r)
+      sorted_l = rec_sort(arr_l, arr_r)
 
-      # Sorts the 2 smallest slices of the array at the bottom of the recursion.
-      if arr_l_rec.size == 1 && arr_r_rec.size == 1
-        if arr_l_rec[0] < arr_r_rec[0]
-          sorted.push(arr_l_rec, arr_r_rec)
-        else
-          sorted.push(arr_r_rec, arr_l_rec)
+      arr_r_rec = merge_sort(arr_r)
+      sorted_r = rec_sort(arr_l, arr_r)
+      [sorted_l, sorted_r].flatten
+    end
+  end
+
+  def rec_sort(arr_l, arr_r)
+    sorted = []
+    if arr_l.size == 1 && arr_r.size == 1
+      if arr_l[0] < arr_r[0]
+        sorted.push(arr_l[0], arr_r[0])
+      else
+        sorted.push(arr_r[0], arr_l[0])
+      end
+    else
+      arr_l.each do |item_l|
+        arr_r.each do |item_r|
+          sorted << if item_l < item_r
+                      item_l
+                    else
+                      item_r
+                    end
         end
       end
-      sorted
     end
+    sorted
   end
 end
 
