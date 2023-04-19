@@ -50,34 +50,29 @@ class Recursion
 
       # Recursion commenced.
       arr_l_rec = merge_sort(arr_l)
-      sorted_l = rec_sort(arr_l, arr_r)
-
       arr_r_rec = merge_sort(arr_r)
-      sorted_r = rec_sort(arr_l, arr_r)
-      [sorted_l, sorted_r].flatten
-    end
-  end
 
-  def rec_sort(arr_l, arr_r)
-    sorted = []
-    if arr_l.size == 1 && arr_r.size == 1
-      if arr_l[0] < arr_r[0]
-        sorted.push(arr_l[0], arr_r[0])
+      sorted = []
+      # Returns sorted array if they're both of size 1,
+      # the loop below 'else' is not capable of this
+      if arr_l_rec.size == 1 && arr_r_rec.size == 1
+        sorted << if arr_l_rec[0] < arr_r_rec[0]
+                    [arr_l_rec[0], arr_r_rec[0]]
+                  else
+                    [arr_r_rec[0], arr_l_rec[0]]
+                  end
       else
-        sorted.push(arr_r[0], arr_l[0])
-      end
-    else
-      arr_l.each do |item_l|
-        arr_r.each do |item_r|
-          sorted << if item_l < item_r
-                      item_l
+        # Sorts the arrays by combining them with zip and sorting them. This saves a few lines
+        arr_l_rec.zip(arr_r_rec).each_with_index do |(l, r), index|
+          sorted << if l < r
+                      l
                     else
-                      item_r
+                      r
                     end
         end
       end
+      sorted.flatten
     end
-    sorted
   end
 end
 
