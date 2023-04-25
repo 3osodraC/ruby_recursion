@@ -39,44 +39,24 @@ class Recursion
   #   sort right half
   #   merge
   def merge_sort(arr)
-    if arr.size < 2
-      arr
-    else
-      # Splits the array in two.
-      arr_l = []
-      arr_r = []
-      half = (arr.size / 2).ceil
-      arr.each_slice(half) { |slice| arr_l.empty? ? arr_l = slice : arr_r = slice }
+    return arr if arr.size < 2
 
-      # Recursion commenced.
-      arr_l_rec = merge_sort(arr_l)
-      arr_r_rec = merge_sort(arr_r)
+    # Splits the array in two.
+    arr_l = []
+    arr_r = []
+    half = (arr.size / 2).ceil
+    arr.each_slice(half) { |slice| arr_l.empty? ? arr_l = slice : arr_r = slice }
 
-      sorted = []
-      # Returns sorted array if they're both of size 1,
-      # the loop below 'else' is not capable of this
-      if arr_l_rec.size == 1 && arr_r_rec.size == 1
-        sorted << if arr_l_rec[0] < arr_r_rec[0]
-                    [arr_l_rec[0], arr_r_rec[0]]
-                  else
-                    [arr_r_rec[0], arr_l_rec[0]]
-                  end
-      else
-        # Select the smallest value from the front of each list (excluding values in sorted)
-        # Select the minimum of the two values
-        # Add the selected value to sorted
-        # Repeat what's above until one list becomes empty
-        # Copy all remaining values into sorted
-        while !arr_l_rec.empty? && !arr_r_rec.empty?
-          sorted << if arr_l_rec[0] < arr_r_rec[0]
-            arr_l_rec.shift
-          else
-            arr_r_rec.shift
-          end
-        end
-      end
-      sorted.flatten
+    # Recursion commenced.
+    arr_l_rec = merge_sort(arr_l)
+    arr_r_rec = merge_sort(arr_r)
+
+    sorted = []
+
+    until arr_l_rec.empty? || arr_r_rec.empty?
+      arr_l_rec[0] <= arr_r_rec[0] ? sorted << arr_l_rec.shift : sorted << arr_r_rec.shift
     end
+    sorted.concat(arr_l_rec).concat(arr_r_rec)
   end
 end
 
