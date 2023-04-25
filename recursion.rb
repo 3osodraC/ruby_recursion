@@ -62,13 +62,17 @@ class Recursion
                     [arr_r_rec[0], arr_l_rec[0]]
                   end
       else
-        # Sorts the arrays by combining them with zip and sorting them. This saves a few lines
-        arr_l_rec.zip(arr_r_rec).each do |(l, r)|
-          sorted << if l < r
-                      l
-                    else
-                      r
-                    end
+        # Select the smallest value from the front of each list (excluding values in sorted)
+        # Select the minimum of the two values
+        # Add the selected value to sorted
+        # Repeat what's above until one list becomes empty
+        # Copy all remaining values into sorted
+        while !arr_l_rec.empty? && !arr_r_rec.empty?
+          sorted << if arr_l_rec[0] < arr_r_rec[0]
+            arr_l_rec.shift
+          else
+            arr_r_rec.shift
+          end
         end
       end
       sorted.flatten
