@@ -54,6 +54,7 @@ class Recursion
     sorted = []
 
     until arr_l_rec.empty? || arr_r_rec.empty?
+      # Pushes smallest value into the sorted arr and removes it from the unsorted arr.
       arr_l_rec[0] <= arr_r_rec[0] ? sorted << arr_l_rec.shift : sorted << arr_r_rec.shift
     end
     sorted.concat(arr_l_rec).concat(arr_r_rec)
